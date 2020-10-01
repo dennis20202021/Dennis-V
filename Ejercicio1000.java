@@ -12,7 +12,7 @@ public class Main {
  
         
          System.out.println("Hello Beauty World!");
-         System.out.println("C'mmon girls!");
+         
  
     }
  
