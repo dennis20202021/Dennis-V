@@ -1,0 +1,51 @@
+Ejercicios de Principios de SOLID
+
+3.Principio de sustitución Liskov (Liskov's substitution principle):
+
+Lo que está mal:
+
+public class Libreria{
+
+     public void LibroTipo(){
+        
+         System.out.println("Tipos de Libros"); //La subclase "SinTiposdeLibros" no debería implementar el código de
+                                                //la clase "Libreria" ya que staría siendo reemplazada
+                                                //con la clase padre "Libreria"
+         
+     }
+}//Fin clase
+
+public class SinTiposdelibros extends Libreria{
+    
+    override void LibroTipo(){
+        throws new RuntimeException("No hay ningún tipo de libro solicitado previamente");
+    }
+}//Fin clase
+
+Lo que está bien:
+
+public class Libreria{
+
+     public void LibroTipo(){
+        
+         System.out.println("Tipos de Libros");
+         
+     }
+}
+public class Terror extends Libreria{
+    
+    override void LibroTipo(){              //En cualquier clase del código se usa la clase "Libreria".
+                                            //Se puede reemplazar por las subclases "Terror" o "Novela".
+        
+        System.out.println("Terror");
+        
+    }
+}
+public class Novela extends Libreria{
+    
+    override void LibroTipo(){
+        
+        System.out.println("Novela");
+        
+    }
+}

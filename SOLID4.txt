@@ -1,0 +1,31 @@
+Ejercicios de Principios de SOLID
+
+4.Principio de separación de interfaz (Interface segregation principle):
+
+Lo que está mal:
+
+public interface ILibreria{
+
+     public void CrearLibro();         //No hay separación de interfaz al crear el mismo método de CrearLibro()
+                                       //en ambas interfaces.
+     
+}
+public interface INuevaLibreria{
+    
+    public void CrearLibro();
+    public void LeerLibro();
+    
+}//Fin clase
+
+Lo que está bien:
+
+public interface ILibreria{
+
+     public void CrearLibro();      //Las interfaces están separadas.
+     
+}
+public interface ILeerLibreria{
+    
+    public void LeerLibro();
+    
+}//Fin clase

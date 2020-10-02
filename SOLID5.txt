@@ -1,0 +1,49 @@
+Ejercicios de Principios de SOLID
+
+5.Principio de inversión de dependencia (Dependency inversion principle):
+
+Lo que está mal:
+
+public class Libreria{
+    
+    private IOException e = new IOException();
+
+     public void Libro(String autor, Database db) { //La clase depende en lo concreto y no en lo abstracto
+        
+        
+        try { 
+            db.add(autor);
+        }
+        catch(IOException e){
+            
+            System.err.println(e);
+        }
+     }
+}//Fin clase 
+
+Lo que está bien:
+
+public class Libreria{
+    
+    private logger _error;
+    
+    public void Libro(logger injectedlogger){
+        
+        _error=injectedlogger;
+        
+    }
+    
+    public void Libro(String autor, Database db) { //La clase depende de lo abstracto y no de lo concreto.
+                                                   //la dependencia de entrada (injected) no depende de la clase 
+                                                   // para definir el tipo específico de _error.
+        
+        
+        try { 
+            db.add(autor);
+        }
+        catch(IOException e){
+            
+            System.err.println(_error);
+        }
+     }
+} //Fin clase

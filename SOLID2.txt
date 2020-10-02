@@ -1,0 +1,44 @@
+Ejercicios de Principios de SOLID
+
+2.Principio abierto/cerrado (Open/closed principle):
+
+Lo que está mal:
+
+public class Libreria{
+
+     public void Libro(String autor, Database db){
+
+         if(autor.equals("#"){
+             
+             db.AddAsTag(autor);     //El comportamiento difiere con el caracter inicial "#", 
+                                     //y por lo tanto, si menciona otro caracter inicial como "@" 
+                                     //se modifica la clase en la función método Libro() con otra condicional.
+         }else{
+             
+             db.Add(autor);
+         }
+         
+     }
+}//Fin clase
+
+Lo que está bien:
+
+public class Libreria{
+
+     public void Libro(String autor, Database db){
+        
+         db.Add(autor);
+         
+     }
+}
+
+public class Etiqueta : Libreria{
+    
+    override void Libro(String autor, Database db){  //El comportamiento se extiende al objeto Libreria controlando
+                                                     //el método Libro().
+                                                     //Es posible cambiar la manera en el que autor puede ser evaluada.
+        
+        db.AddAsTag(autor);
+        
+    }
+}//Fin clase

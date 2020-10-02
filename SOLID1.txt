@@ -1,0 +1,49 @@
+Ejercicios de Principios de SOLID
+
+1. Principio de responsabilidad única (Single responsability principle):
+
+Lo que está mal:
+
+public class Libreria{
+    
+    private IOException error = new IOException();
+
+     public void Libro(String autor, Database db) { //La clase posee mucha responsabilidad
+        
+        
+        try { 
+            db.add(autor);
+        }
+        catch(IOException e){
+            
+            System.err.println(error);
+        }
+     }
+}//Fin clase
+
+Lo que está bien:
+
+public class Libreria{
+    
+    private IOException error = new IOException();
+
+     public void Libro(String autor, Database db) {
+        
+        
+        try { 
+            db.add(autor);
+        }
+        catch(IOException e){
+            
+            System.err.println(error);    //Dos clases, cada una con su propia responsiblidad
+        }
+     }
+}//Fin clase
+
+public class IOException{
+    
+    public void cargar(String err){
+        db.cargarError("!Ha ocurrido un error!"+err);
+        File.WriteAllText("¡Error de autor!"+err);
+    }
+}//Fin clase
